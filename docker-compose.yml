@@ -1,0 +1,11 @@
+  version: '3.3'
+
+  services:
+    register:
+      env_file: local.env
+      build: .
+      volumes:
+        - "./:/var/www/html/"
+      ports:
+        - "8080:80"
+
