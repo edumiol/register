@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+use App\Contracts\UserRepository;
+use APP\User;
+
 class InMemoryUserRepository implements UserRepository
 {
     public function __construct(User ...$users)

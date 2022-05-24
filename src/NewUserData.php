@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class NewUserData
 {
     public function __construct(

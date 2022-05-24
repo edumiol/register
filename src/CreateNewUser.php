@@ -1,5 +1,9 @@
 <?php
 
+namespace App;
+use App\Contracts\Command;
+use App\Contracts\UserRepository;
+
 class CreateNewUser implements Command
 {
     public function __construct(

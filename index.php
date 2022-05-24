@@ -1,5 +1,12 @@
 <?php
 
+
+use App\CreateNewUser;
+use App\InMemoryUserRepository;
+use App\NewUserData;
+use App\UpdateUserEmail;
+use App\UpdateUserEmailData;
+
 require_once "bootstrap.php";
 
 $repository = new InMemoryUserRepository();

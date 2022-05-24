@@ -1,5 +1,7 @@
 <?php
 
+namespace APP;
+
 class User
 {
     public function __construct(
