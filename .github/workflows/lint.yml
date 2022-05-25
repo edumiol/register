@@ -13,8 +13,8 @@ jobs:
       - name: Start Container
         run: docker-compose up -d --build
         
-      - name: Run PHPStan
-        run: docker-compose exec -T action composer phpstan
+      - name: Install dependencies
+        run: docker-compose exec -T action composer install
 
       - name: Down Container
         run: docker-compose down
