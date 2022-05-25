@@ -1,16 +1,28 @@
 name: Code Lint
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - uses: php-actions/composer@v6
-    - uses: php-actions/phpstan@v3
-      with:
-        path: src/
+      - uses: actions/checkout@v2
+
+      - name: Start Container
+        run: docker-compose up -d --build
+
+      - name: Install dependencies
+        run: docker-compose exec -T action composer install
+
+      - name: Run PHPStan
+        run: docker-compose exec -T action composer phpstan
+
+      - name: Run PHPCs-fixer
+        run: docker-compose exec -T action composer php-cs-fixer
+
+      - name: Down Container
+        run: docker-compose down
 
    
