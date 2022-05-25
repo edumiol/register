@@ -5,9 +5,10 @@
     }
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit tests --colors=always --testdox --coverage-clover coverage.xml",
+    "test": "./vendor/bin/phpunit tests --colors=always --testdox",
     "phpstan": "./vendor/bin/phpstan analyse --level max tests",
-    "php-cs-fixer": "./vendor/bin/php-cs-fixer fix src"
+    "php-cs-fixer": "./vendor/bin/php-cs-fixer fix src",
+    "coverage": "./vendor/bin/phpunit tests --colors=always --testdox --coverage-clover coverage.xml"
   },
   "require": {
     "php": "8.1.*"
