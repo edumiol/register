@@ -14,10 +14,10 @@ jobs:
         run: docker-compose up -d --build
 
       - name: Install dependencies
-        run: docker-compose exec -T action composer install
+        run: docker-compose exec -T register composer install
 
       - name: Run PHPUnit Tests
-        run: docker-compose exec -T action composer test
+        run: docker-compose exec -T register composer test
 
       - name: Down Container
         run: docker-compose down
