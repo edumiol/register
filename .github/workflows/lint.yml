@@ -15,10 +15,10 @@ jobs:
         run: docker-compose up -d --build
 
       - name: Run PHPStan
-        run: docker-compose exec -T action composer phpstan
+        run: docker-compose exec -T register composer phpstan
 
       - name: Run PHPCs-fixer
-        run: docker-compose exec -T action composer php-cs-fixer
+        run: docker-compose exec -T register composer php-cs-fixer
 
       - name: Down Container
         run: docker-compose down
