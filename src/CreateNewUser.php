@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+
 use App\Contracts\Command;
 use App\Contracts\UserRepository;
 
