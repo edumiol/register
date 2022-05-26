@@ -7,7 +7,7 @@ use App\InMemoryUserRepository;
 use App\NewUserData;
 use App\UpdateUserEmail;
 use App\UpdateUserEmailData;
-use APP\User;
+use App\User;
 use PHPUnit\Framework\TestCase;
 
 /**
