@@ -42,9 +42,7 @@ class CreateNewUserTest extends TestCase
     }
 
     /**
-     * @param string $code
-     * @param string $username
-     * @param string $email
+     * @param NewUserData $data
      * @return void
      */
     private function save(NewUserData $data): void
@@ -72,6 +70,9 @@ class CreateNewUserTest extends TestCase
         return new NewUserData($code, $username, $email);
     }
 
+    /**
+     * @return iterable
+     */
     private function getUsers(): iterable
     {
         yield [

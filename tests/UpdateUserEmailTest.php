@@ -52,9 +52,7 @@ class UpdateUserEmailTest extends TestCase
     }
 
     /**
-     * @param string $code
-     * @param string $username
-     * @param string $email
+     * @param NewUserData $data
      * @return void
      */
     private function save(NewUserData $data): void
