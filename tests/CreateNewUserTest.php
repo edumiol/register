@@ -5,8 +5,6 @@ declare(strict_types=1);
 use App\CreateNewUser;
 use App\InMemoryUserRepository;
 use App\NewUserData;
-use App\UpdateUserEmail;
-use App\UpdateUserEmailData;
 use App\User;
 use PHPUnit\Framework\TestCase;
 
@@ -28,42 +26,65 @@ class CreateNewUserTest extends TestCase
 
     /**
      * @covers \App\InMemoryUserRepository::get
-     * @uses \App\NewUserData
      * @uses \App\CreateNewUser
      */
     public function testShouldCreateNewUser(): void
     {
-        $this->save('emiranda.dev@gmail.com','edumiol', 'emiranda.dev@gmail.com');
-        $this->save('joao@objective.com.br', 'jao', 'joao@gmail.com');
-        $user = $this->getUser('emiranda.dev@gmail.com');
+        foreach ($this->getUsers() as $user) {
+            $data = $this->getUserData($user['code'], $user['username'], $user['email']);
+            $this->save($data);
+        }
+
+        $user = $this->getUser($code = 'emiranda.dev@gmail.com');
         $excepted = 'edumiol';
 
         $this->assertEquals($excepted, $user->username);
     }
 
-    public function testShouldUpdateUserEmail(): void
+    /**
+     * @param string $code
+     * @param string $username
+     * @param string $email
+     * @return void
+     */
+    private function save(NewUserData $data): void
     {
-        $this->testShouldCreateNewUser();
-        $data = new UpdateUserEmailData('joao@objective.com.br', 'jamil@objective.com.br');
-        $action = new UpdateUserEmail($this->repository, $data);
-        $action->execute();
-
-        $expected = 'jamil@objective.com.br';
-        $user = $this->getUser('joao@objective.com.br');
-
-        $this->assertEquals($expected, $user->email);
+        (new CreateNewUser($this->repository, $data))->execute();
     }
 
-    private function save(string $code, string $username, string $email): void
-    {
-        $data = new NewUserData($code, $username, $email);
-        $action = new CreateNewUser($this->repository, $data);
-        $action->execute();
-    }
-
+    /**
+     * @param string $code
+     * @return User
+     */
     private function getUser(string $code): User
     {
         return $this->repository->get($code);
+    }
+
+    /**
+     * @param string $code
+     * @param string $username
+     * @param string $email
+     * @return NewUserData
+     */
+    private function getUserData(string $code, string $username, string $email): NewUserData
+    {
+        return new NewUserData($code, $username, $email);
+    }
+
+    private function getUsers(): iterable
+    {
+        yield [
+            'code' => 'emiranda.dev@gmail.com',
+            'username' => 'edumiol',
+            'email' => 'emiranda.dev@gmail.com'
+        ];
+
+        yield [
+            'code' => 'joao@objective.com.br',
+            'username' => 'jao',
+            'email' => 'joao@gmail.com'
+        ];
     }
 
 }
