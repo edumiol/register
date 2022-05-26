@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,7 +14,7 @@ class UserTest extends TestCase
      * @covers \App\User::updateEmail
      * @dataProvider createUser
      */
-    public function testShouldUpdateEmail($id, $username, $email): void
+    public function testShouldUpdateEmail(string $id, string $username, string $email): void
     {
         $user = new User($id, $username, $email);
         $user->updateEmail($email = 'eduardo.miranda@objective.com');
@@ -21,15 +22,12 @@ class UserTest extends TestCase
         $this->assertSame($user->email, $email, "The e-mail informed not is igual!");
     }
 
-    /**
-     * @return iterable<array<{id:string, username:string, email:string}>>
-     */
-    public function createUser(): iterable
+    public static function createUser(): Generator
     {
         yield [
-          'id' => 'emiranda.dev@gmail.com',
-          'username' => 'edumiol',
-          'email' => 'emiranda.dev@gmail.com'
+            'id' => 'emiranda.dev@gmail.com',
+            'username' => 'edumiol',
+            'email' => 'emiranda.dev@gmail.com'
         ];
     }
 
