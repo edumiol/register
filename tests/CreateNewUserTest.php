@@ -71,7 +71,7 @@ class CreateNewUserTest extends TestCase
     }
 
     /**
-     * @return iterable
+     * @return array<array{code:string, username:string, email:string}>
      */
     private function getUsers(): iterable
     {
