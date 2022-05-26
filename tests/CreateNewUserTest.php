@@ -61,7 +61,7 @@ class CreateNewUserTest extends TestCase
         $action->execute();
     }
 
-    private function getUser(string $code): stdClass
+    private function getUser(string $code): User
     {
         return $this->repository->get($code);
     }
