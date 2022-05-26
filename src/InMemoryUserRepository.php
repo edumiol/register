@@ -19,7 +19,7 @@ class InMemoryUserRepository implements UserRepository
         $this->users[$user->id] = $user;
     }
 
-    public function get(string $id): User
+    public function get(string $id)
     {
         return $this->users[$id];
     }

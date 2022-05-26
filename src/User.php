@@ -6,8 +6,8 @@ class User
 {
     public function __construct(
         public readonly string $id,
-        private string $username,
-        private string $email,
+        public string $username,
+        public string $email,
     ) {
     }
 

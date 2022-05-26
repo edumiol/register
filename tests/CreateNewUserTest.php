@@ -2,7 +2,12 @@
 
 declare(strict_types=1);
 
+use App\CreateNewUser;
+use App\InMemoryUserRepository;
 use App\NewUserData;
+use App\UpdateUserEmail;
+use App\UpdateUserEmailData;
+use APP\User;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -10,22 +15,55 @@ use PHPUnit\Framework\TestCase;
  */
 class CreateNewUserTest extends TestCase
 {
+
+    private InMemoryUserRepository $repository;
+
     /**
-     * @covers \App\NewUserData
+     * @before
+     */
+    public function setupUserRepository(): void
+    {
+        $this->repository = new InMemoryUserRepository();
+    }
+
+    /**
+     * @covers \App\InMemoryUserRepository::get
+     * @uses \App\NewUserData
+     * @uses \App\CreateNewUser
      */
     public function testShouldCreateNewUser(): void
     {
-        $data = new NewUserData('emiranda.dev@gmail.com','edumiol', 'emiranda.dev@gmail.com');
-//        $repository = new InMemoryUserRepository();
-//        $action = new CreateNewUser($repository, $data);
-//        $action->execute();
-//
-//        $excepted = 'edumiol';
-//        $user = $repository->get($data->id);
-//
-//        $this->assertEquals($excepted, $user->username);
+        $this->save('emiranda.dev@gmail.com','edumiol', 'emiranda.dev@gmail.com');
+        $this->save('joao@objective.com.br', 'jao', 'joao@gmail.com');
+        $user = $this->getUser('emiranda.dev@gmail.com');
+        $excepted = 'edumiol';
 
-        $this->assertIsObject($data);
-
+        $this->assertEquals($excepted, $user->username);
     }
+
+    public function testShouldUpdateUserEmail(): void
+    {
+        $this->testShouldCreateNewUser();
+        $data = new UpdateUserEmailData('joao@objective.com.br', 'jamil@objective.com.br');
+        $action = new UpdateUserEmail($this->repository, $data);
+        $action->execute();
+
+        $expected = 'jamil@objective.com.br';
+        $user = $this->getUser('joao@objective.com.br');
+
+        $this->assertEquals($expected, $user->email);
+    }
+
+    private function save(string $code, string $username, string $email): void
+    {
+        $data = new NewUserData($code, $username, $email);
+        $action = new CreateNewUser($this->repository, $data);
+        $action->execute();
+    }
+
+    private function getUser(string $code): stdClass
+    {
+        return $this->repository->get($code);
+    }
+
 }
