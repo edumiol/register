@@ -5,13 +5,9 @@ namespace App;
 use Generator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \App\User
- */
 class UserTest extends TestCase
 {
     /**
-     * @covers \App\User::updateEmail
      * @dataProvider createUser
      */
     public function testShouldUpdateEmail(string $id, string $username, string $email): void

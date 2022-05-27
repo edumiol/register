@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 use App\CreateNewUser;
 use App\InMemoryUserRepository;
 use App\NewUserData;
