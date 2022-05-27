@@ -26,7 +26,10 @@ class CreateNewUserTest extends TestCase
 
     /**
      * @covers \App\InMemoryUserRepository::get
-     * @uses \App\CreateNewUser
+     * @uses \App\InMemoryUserRepository::__construct
+     * @uses \App\InMemoryUserRepository::save
+     * @uses \App\NewUserData::__construct
+     * @uses \App\User::__construct
      */
     public function testShouldCreateNewUser(): void
     {
@@ -42,6 +45,7 @@ class CreateNewUserTest extends TestCase
     }
 
     /**
+     * @covers \App\CreateNewUser
      * @param NewUserData $data
      * @return void
      */
@@ -51,6 +55,7 @@ class CreateNewUserTest extends TestCase
     }
 
     /**
+     * @covers \App\InMemoryUserRepository::get
      * @param string $code
      * @return User
      */
@@ -60,6 +65,7 @@ class CreateNewUserTest extends TestCase
     }
 
     /**
+     * @covers \App\NewUserData
      * @param string $code
      * @param string $username
      * @param string $email

@@ -10,6 +10,9 @@ use App\UpdateUserEmailData;
 use App\User;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \App\UpdateUserEmail
+ */
 class UpdateUserEmailTest extends TestCase
 {
 
@@ -26,6 +29,14 @@ class UpdateUserEmailTest extends TestCase
     /**
      * @covers \App\UpdateUserEmail::execute
      * @uses \App\UpdateUserEmailData
+     * @uses \App\CreateNewUser::__construct
+     * @uses \App\CreateNewUser::execute
+     * @uses \App\InMemoryUserRepository::__construct
+     * @uses \App\InMemoryUserRepository::get
+     * @uses \App\InMemoryUserRepository::save
+     * @uses \App\User::__construct
+     * @uses \App\User::updateEmail
+     * @uses \App\NewUserData::__construct
      */
     public function testShouldUpdateUserEmail(): void
     {
@@ -41,6 +52,7 @@ class UpdateUserEmailTest extends TestCase
     }
 
     /**
+     * @covers \App\NewUserData
      * @param string $code
      * @param string $username
      * @param string $email
@@ -52,6 +64,7 @@ class UpdateUserEmailTest extends TestCase
     }
 
     /**
+     * @covers \App\CreateNewUser::execute
      * @param NewUserData $data
      * @return void
      */
@@ -61,6 +74,7 @@ class UpdateUserEmailTest extends TestCase
     }
 
     /**
+     * @covers \App\InMemoryUserRepository::get
      * @param string $code
      * @return User
      */
