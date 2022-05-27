@@ -10,9 +10,6 @@ use App\UpdateUserEmailData;
 use App\User;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers \App\UpdateUserEmail
- */
 class UpdateUserEmailTest extends TestCase
 {
 
@@ -26,18 +23,6 @@ class UpdateUserEmailTest extends TestCase
         $this->repository = new InMemoryUserRepository();
     }
 
-    /**
-     * @covers \App\UpdateUserEmail::execute
-     * @uses \App\UpdateUserEmailData
-     * @uses \App\CreateNewUser::__construct
-     * @uses \App\CreateNewUser::execute
-     * @uses \App\InMemoryUserRepository::__construct
-     * @uses \App\InMemoryUserRepository::get
-     * @uses \App\InMemoryUserRepository::save
-     * @uses \App\User::__construct
-     * @uses \App\User::updateEmail
-     * @uses \App\NewUserData::__construct
-     */
     public function testShouldUpdateUserEmail(): void
     {
         $data = $this->getUserData($code='joao@objective.com.br', $username='jao', $email='joao@gmail.com');
@@ -50,14 +35,7 @@ class UpdateUserEmailTest extends TestCase
 
         $this->assertEquals($email, $user->email);
     }
-
-    /**
-     * @covers \App\NewUserData
-     * @param string $code
-     * @param string $username
-     * @param string $email
-     * @return NewUserData
-     */
+    
     private function getUserData(string $code, string $username, string $email): NewUserData
     {
         return new NewUserData($code, $username, $email);
@@ -68,11 +46,6 @@ class UpdateUserEmailTest extends TestCase
         (new CreateNewUser($this->repository, $data))->execute();
     }
 
-    /**
-     * @covers \App\InMemoryUserRepository::get
-     * @param string $code
-     * @return User
-     */
     private function getUser(string $code): User
     {
         return $this->repository->get($code);
