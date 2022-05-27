@@ -62,12 +62,7 @@ class UpdateUserEmailTest extends TestCase
     {
         return new NewUserData($code, $username, $email);
     }
-
-    /**
-     * @covers \App\CreateNewUser::execute
-     * @param NewUserData $data
-     * @return void
-     */
+    
     private function save(NewUserData $data): void
     {
         (new CreateNewUser($this->repository, $data))->execute();
